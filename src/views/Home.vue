@@ -53,6 +53,22 @@
           </ul>
           -
         </div>
+        <div v-if="pokemons.length > 0" class="mt-5">
+          <table class="border-collapse border border-slate-500 w-full">
+            <thead>
+              <tr>
+                <th class="border border-slate-300 p-2">Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(pokemon, index) in pokemons" v-bind:key="index">
+                <td class="border border-slate-300 p-2">
+                  {{ pokemon.name }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="mt-5">
           <a
             class="text-blue-600 hover:text-blue-800 cursor-pointer"
@@ -84,10 +100,31 @@
 
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
 
 const showSecondExercise = ref(false)
 
 const showNextExercise = () => {
   showSecondExercise.value = !showSecondExercise.value
+}
+</script>
+<script>
+export default {
+  data() {
+    return {
+      pokemons: [],
+    }
+  },
+  created() {
+    this.GetPokemons()
+  },
+  methods: {
+    async GetPokemons() {
+      const result = await axios.get(
+        'https://pokeapi.co/api/v2/pokemon/?limit=5',
+      )
+      this.pokemons = result.data.results
+    },
+  },
 }
 </script>
