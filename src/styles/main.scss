@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {}
+
+@layer components {
+  .form-control {
+    @apply px-4 py-3 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md;
+  }
+
+  .card {
+    @apply p-4 bg-white border rounded-xl text-left;
+
+    .header {
+      @apply text-lg font-semibold capitalize
+    }
+  }
+}
+
+@layer utilities {
+  .icon {
+    @apply h-4 w-4
+  }
+}
